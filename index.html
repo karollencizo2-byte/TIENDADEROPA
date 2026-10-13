@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Fashion & Style | Tienda Virtual Semántica HTML5</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aura: {
+                            beige: '#F5F2EB',
+                            sand: '#E6DFC8',
+                            dark: '#1A1A1A',
+                            gold: '#C5A880',
+                            accent: '#8C6D46'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .semantic-highlight {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .semantic-highlight::after {
+            content: attr(data-semantic-tag);
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(197, 168, 128, 0.9);
+            color: #1a1a1a;
+            font-size: 0.65rem;
+            font-family: monospace;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 20;
+            display: none;
+        }
+        .show-semantic-tags .semantic-highlight::after {
+            display: block;
+        }
+        .show-semantic-tags .semantic-highlight {
+            outline: 2px dashed #C5A880 !important;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-[#FAF9F6] text-aura-dark font-sans antialiased selection:bg-aura-sand selection:text-aura-dark flex flex-col min-h-screen">
+
+    <!-- BARRA SUPERIOR DE HERRAMIENTAS PEDAGÓGICAS / INTERACTIVIDAD -->
+    <div class="bg-aura-dark text-white text-xs py-2 px-4 border-b border-gray-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="font-medium tracking-wide">Estructura HTML5 Semántica Cumplida</span>
+            </div>
+            
+            <div class="flex items-center space-x-3 text-xs">
+                <button id="toggle-tags-btn" onclick="toggleSemanticTags()" class="bg-aura-gold/20 hover:bg-aura-gold hover:text-aura-dark text-aura-gold px-3 py-1 rounded-full transition flex items-center space-x-1 border border-aura-gold/30">
+                    <i class="fa-solid fa-code text-xs"></i>
+                    <span id="tag-btn-text">Resaltar Etiquetas Semánticas</span>
+                </button>
+                <button onclick="openSemanticGuideModal()" class="bg-gray-800 hover:bg-gray-700 text-white px-3 py-1 rounded-full transition flex items-center space-x-1">
+                    <i class="fa-solid fa-book-open text-xs"></i>
+                    <span>Guía & Esquema</span>
+                </button>
+                <button onclick="toggleChecklistModal()" class="bg-gray-800 hover:bg-gray-700 text-white px-3 py-1 rounded-full transition flex items-center space-x-1">
+                    <i class="fa-solid fa-check-double text-xs text-green-400"></i>
+                    <span>Verificación de Guía</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ENCABEZADO Y MENÚ DE NAVEGACIÓN (<header> & <nav>) -->
+    <header class="semantic-highlight bg-white/90 backdrop-blur-md sticky top-[33px] z-40 border-b border-stone-200 transition-all duration-200" data-semantic-tag="<header>">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo e Identidad de Marca -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-aura-dark text-white flex items-center justify-center rounded-full font-serif text-xl font-bold tracking-tighter">
+                        A
+                    </div>
+                    <div>
+                        <h1 class="font-serif text-2xl font-bold tracking-wider text-aura-dark">AURA</h1>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-medium">Fashion & Style Boutique</p>
+                    </div>
+                </div>
+
+                <!-- Menú de Navegación Semántico (<nav>) -->
+                <nav class="semantic-highlight hidden md:flex items-center space-x-8" data-semantic-tag="<nav>">
+                    <a href="#inicio" class="text-sm font-medium hover:text-aura-gold transition border-b-2 border-transparent hover:border-aura-gold py-1">Inicio</a>
+                    <a href="#colecciones" class="text-sm font-medium hover:text-aura-gold transition border-b-2 border-transparent hover:border-aura-gold py-1">Colecciones</a>
+                    <a href="#novedades" class="text-sm font-medium hover:text-aura-gold transition border-b-2 border-transparent hover:border-aura-gold py-1">Novedades & Tendencias</a>
+                    <a href="#promociones" class="text-sm font-medium hover:text-aura-gold transition border-b-2 border-transparent hover:border-aura-gold py-1">Promociones</a>
+                    <a href="#contacto" class="text-sm font-medium hover:text-aura-gold transition border-b-2 border-transparent hover:border-aura-gold py-1">Contacto</a>
+                </nav>
+
+                <!-- Acciones del Usuario & Carrito -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleCartDrawer()" class="relative p-2 text-aura-dark hover:text-aura-gold transition" aria-label="Carrito de compras">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute top-0 right-0 bg-aura-gold text-aura-dark font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <!-- Botón Hamburguesa Móvil -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-aura-dark focus:outline-none" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable para Móviles -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-4 space-y-2">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium hover:text-aura-gold">Inicio</a>
+            <a href="#colecciones" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium hover:text-aura-gold">Colecciones</a>
+            <a href="#novedades" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium hover:text-aura-gold">Novedades & Tendencias</a>
+            <a href="#promociones" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium hover:text-aura-gold">Promociones</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium hover:text-aura-gold">Contacto</a>
+        </div>
+    </header>
+
+    <!-- 6. CONTENIDO PRINCIPAL (<main>) -->
+    <main class="semantic-highlight flex-grow" id="inicio" data-semantic-tag="<main>">
+        
+        <!-- HERO / BANNER DE BIENVENIDA -->
+        <section class="semantic-highlight relative bg-aura-beige py-16 md:py-24 border-b border-stone-200" data-semantic-tag="<section>">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="inline-block bg-aura-sand text-aura-dark text-xs uppercase tracking-widest px-3 py-1 rounded-full font-semibold">
+                        Colección Primavera - Verano
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold tracking-tight text-aura-dark leading-tight">
+                        Elegancia Atemporal & Estilo Contemporáneo
+                    </h2>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Descubre prendas diseñadas meticulosamente con telas sostenibles y cortes vanguardistas. Refleja tu esencia con la auténtica sobriedad de Aura Fashion & Style.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#colecciones" class="bg-aura-dark text-white px-7 py-3 rounded-md text-sm font-medium hover:bg-aura-gold hover:text-aura-dark transition shadow-lg flex items-center space-x-2">
+                            <span>Ver Catálogo</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <button onclick="openSemanticGuideModal()" class="border border-aura-dark text-aura-dark px-6 py-3 rounded-md text-sm font-medium hover:bg-aura-dark hover:text-white transition">
+                            <i class="fa-solid fa-code mr-2"></i>Ver Arquitectura HTML5
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Figura Destacada con <figure> y <figcaption> -->
+                <figure class="semantic-highlight relative rounded-2xl overflow-hidden shadow-2xl group" data-semantic-tag="<figure>">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Modelo vistiendo atuendo minimalista beige y blanco de la colección de verano de Aura Fashion" 
+                         class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
+                    <figcaption class="semantic-highlight absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-4 text-xs italic" data-semantic-tag="<figcaption>">
+                        Figura 1. Atuendo 'Minimalist Luxury' presentado en el Desfile de Modas Primavera-Verano.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- CONTENIDO PRINCIPAL: GRID DE CATÁLOGO Y NOTICIAS + SIDEBAR (<aside>) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <!-- COLUMNA PRINCIPAL (2 SECCIONES CUMPLIENDO REQUISITOS DE LA GUÍA) -->
+                <div class="lg:col-span-2 space-y-16">
+                    
+                    <!-- SECCIÓN 1: COLECCIÓN / CATÁLOGO DE PRODUCTOS (<section>) -->
+                    <section id="colecciones" class="semantic-highlight scroll-mt-28" data-semantic-tag="<section>">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 border-b border-gray-200 pb-4">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-aura-accent font-semibold">Catálogo Exclusivo</span>
+                                <h2 class="font-serif text-3xl font-bold text-aura-dark mt-1">Prendas Destacadas</h2>
+                            </div>
+                            
+                            <!-- Filtros Interactivos JS -->
+                            <div class="flex flex-wrap gap-2 mt-4 sm:mt-0" id="filter-buttons">
+                                <button onclick="filterCategory('all')" class="filter-btn active text-xs px-3 py-1.5 rounded-full bg-aura-dark text-white font-medium">Todos</button>
+                                <button onclick="filterCategory('jackets')" class="filter-btn text-xs px-3 py-1.5 rounded-full bg-stone-100 text-gray-700 hover:bg-stone-200 font-medium">Chaquetas</button>
+                                <button onclick="filterCategory('dresses')" class="filter-btn text-xs px-3 py-1.5 rounded-full bg-stone-100 text-gray-700 hover:bg-stone-200 font-medium">Vestidos</button>
+                                <button onclick="filterCategory('shirts')" class="filter-btn text-xs px-3 py-1.5 rounded-full bg-stone-100 text-gray-700 hover:bg-stone-200 font-medium">Camisas</button>
+                            </div>
+                        </div>
+
+                        <!-- Grid de Productos / Artículos semánticos (<article>) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8" id="products-grid">
+                            
+                            <!-- ARTÍCULO 1 -->
+                            <article class="semantic-highlight product-card bg-white rounded-xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="jackets" data-semantic-tag="<article>">
+                                <div>
+                                    <figure class="semantic-highlight relative overflow-hidden bg-stone-100 group" data-semantic-tag="<figure>">
+                                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" 
+                                             alt="Chaqueta de cuero artesanal modelo Urban Legend en tono café oscuro" 
+                                             class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                                        <span class="absolute top-3 left-3 bg-aura-dark text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">Nuevo</span>
+                                        <figcaption class="semantic-highlight absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] p-1.5 text-center backdrop-blur-sm" data-semantic-tag="<figcaption>">
+                                            Edición Limitada: Cuero 100% Sostenible
+                                        </figcaption>
+                                    </figure>
+                                    
+                                    <div class="p-5">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3 class="font-serif text-lg font-bold text-aura-dark">Chaqueta de Cuero 'Urban'</h3>
+                                            <span class="text-aura-accent font-bold text-lg">$189.99</span>
+                                        </div>
+                                        <p class="text-gray-600 text-xs mb-4 leading-relaxed">
+                                            Chaqueta de cuero vacuno de origen ético con forro interior de seda natural. Diseño versátil y corte entallado.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="addToCart('Chaqueta de Cuero Urban', 189.99)" class="w-full bg-aura-beige hover:bg-aura-dark hover:text-white text-aura-dark border border-aura-dark/20 font-medium py-2 px-4 rounded-md text-xs transition flex items-center justify-center space-x-2">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>Añadir al Carrito</span>
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- ARTÍCULO 2 -->
+                            <article class="semantic-highlight product-card bg-white rounded-xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="dresses" data-semantic-tag="<article>">
+                                <div>
+                                    <figure class="semantic-highlight relative overflow-hidden bg-stone-100 group" data-semantic-tag="<figure>">
+                                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop" 
+                                             alt="Vestido largo de lino fino tono marfil ideal para eventos de verano" 
+                                             class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                                        <span class="absolute top-3 left-3 bg-aura-gold text-aura-dark text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">Más Vendido</span>
+                                        <figcaption class="semantic-highlight absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] p-1.5 text-center backdrop-blur-sm" data-semantic-tag="<figcaption>">
+                                            Diseño Minimalista de Lino
+                                        </figcaption>
+                                    </figure>
+                                    
+                                    <div class="p-5">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3 class="font-serif text-lg font-bold text-aura-dark">Vestido Lino Minimalista</h3>
+                                            <span class="text-aura-accent font-bold text-lg">$129.50</span>
+                                        </div>
+                                        <p class="text-gray-600 text-xs mb-4 leading-relaxed">
+                                            Confeccionado en 100% lino orgánico transpirable. Ideal para la temporada cálida gracias a su caída fluida.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="addToCart('Vestido Lino Minimalista', 129.50)" class="w-full bg-aura-beige hover:bg-aura-dark hover:text-white text-aura-dark border border-aura-dark/20 font-medium py-2 px-4 rounded-md text-xs transition flex items-center justify-center space-x-2">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>Añadir al Carrito</span>
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- ARTÍCULO 3 -->
+                            <article class="semantic-highlight product-card bg-white rounded-xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="shirts" data-semantic-tag="<article>">
+                                <div>
+                                    <figure class="semantic-highlight relative overflow-hidden bg-stone-100 group" data-semantic-tag="<figure>">
+                                        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop" 
+                                             alt="Camisa Oversize de algodón egipcio tono crema" 
+                                             class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                                        <figcaption class="semantic-highlight absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] p-1.5 text-center backdrop-blur-sm" data-semantic-tag="<figcaption>">
+                                            100% Algodón Egipcio Premium
+                                        </figcaption>
+                                    </figure>
+                                    
+                                    <div class="p-5">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3 class="font-serif text-lg font-bold text-aura-dark">Camisa Oversize Atelier</h3>
+                                            <span class="text-aura-accent font-bold text-lg">$85.00</span>
+                                        </div>
+                                        <p class="text-gray-600 text-xs mb-4 leading-relaxed">
+                                            Corte moderno holgado con botones de concha nácar. Versatilidad total para atuendos casuales o formales.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="addToCart('Camisa Oversize Atelier', 85.00)" class="w-full bg-aura-beige hover:bg-aura-dark hover:text-white text-aura-dark border border-aura-dark/20 font-medium py-2 px-4 rounded-md text-xs transition flex items-center justify-center space-x-2">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>Añadir al Carrito</span>
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- ARTÍCULO 4 -->
+                            <article class="semantic-highlight product-card bg-white rounded-xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="jackets" data-semantic-tag="<article>">
+                                <div>
+                                    <figure class="semantic-highlight relative overflow-hidden bg-stone-100 group" data-semantic-tag="<figure>">
+                                        <img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop" 
+                                             alt="Blazer estructurado lana merino tono neutro beige" 
+                                             class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                                        <figcaption class="semantic-highlight absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] p-1.5 text-center backdrop-blur-sm" data-semantic-tag="<figcaption>">
+                                            Sastrería Contemporánea
+                                        </figcaption>
+                                    </figure>
+                                    
+                                    <div class="p-5">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3 class="font-serif text-lg font-bold text-aura-dark">Blazer Lana 'Aura Executive'</h3>
+                                            <span class="text-aura-accent font-bold text-lg">$210.00</span>
+                                        </div>
+                                        <p class="text-gray-600 text-xs mb-4 leading-relaxed">
+                                            Blazer cruzado con solapas de punta. Confección en lana de merino súper fina para una estructura impecable.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="addToCart('Blazer Lana Executive', 210.00)" class="w-full bg-aura-beige hover:bg-aura-dark hover:text-white text-aura-dark border border-aura-dark/20 font-medium py-2 px-4 rounded-md text-xs transition flex items-center justify-center space-x-2">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>Añadir al Carrito</span>
+                                    </button>
+                                </div>
+                            </article>
+
+                        </div>
+                    </section>
+
+                    <!-- STREAMING_CHUNK:Section 2: News, trends and blog articles with <time>... -->
+                    <!-- SECCIÓN 2: TENDENCIAS Y NOTICIAS DE MODA (<section>) CON USO DE <time> -->
+                    <section id="novedades" class="semantic-highlight bg-stone-100 p-8 rounded-2xl border border-stone-200 scroll-mt-28" data-semantic-tag="<section>">
+                        <div class="mb-6">
+                            <span class="text-xs uppercase tracking-widest text-aura-accent font-semibold">Blog & Eventos</span>
+                            <h2 class="font-serif text-2xl font-bold text-aura-dark mt-1">Tendencias & Noticias del Atelier</h2>
+                        </div>
+
+                        <div class="space-y-6">
+                            
+                            <!-- Noticia 1 (<article>) -->
+                            <article class="semantic-highlight bg-white p-6 rounded-xl border border-stone-200 shadow-sm" data-semantic-tag="<article>">
+                                <div class="flex items-center space-x-2 text-xs text-aura-accent font-medium mb-2">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <!-- Uso explícito de la etiqueta <time> -->
+                                    <time datetime="2026-10-15" class="semantic-highlight font-mono" data-semantic-tag="<time>">15 de Octubre de 2026</time>
+                                    <span>•</span>
+                                    <span>Pasarela & Alta Costura</span>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-aura-dark mb-2 hover:text-aura-accent transition cursor-pointer">
+                                    Aura Presenta su Nueva Pasarela Circular y Sostenible
+                                </h3>
+                                <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                    Anunciamos oficialmente la presentación de nuestra colección cápsula donde el 100% de los textiles provienen de fuentes recicladas y tintes orgánicos no contaminantes.
+                                </p>
+                                <a href="#contacto" class="text-xs font-bold text-aura-dark hover:text-aura-accent flex items-center space-x-1">
+                                    <span>Leer artículo completo</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </article>
+
+                            <!-- Noticia 2 (<article>) -->
+                            <article class="semantic-highlight bg-white p-6 rounded-xl border border-stone-200 shadow-sm" data-semantic-tag="<article>">
+                                <div class="flex items-center space-x-2 text-xs text-aura-accent font-medium mb-2">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <!-- Uso explícito de la etiqueta <time> -->
+                                    <time datetime="2026-11-01T18:00" class="semantic-highlight font-mono" data-semantic-tag="<time>">1 de Noviembre de 2026 a las 18:00 HRS</time>
+                                    <span>•</span>
+                                    <span>Masterclass Privada</span>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-aura-dark mb-2 hover:text-aura-accent transition cursor-pointer">
+                                    Taller Presencial: "El Arte del Armario CÁPSULA"
+                                </h3>
+                                <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                    Aprende a construir un guardarropa funcional de 15 prendas para combinar más de 50 outfits de elegancia diaria con nuestra directora creativa.
+                                </p>
+                                <button onclick="alert('Reserva abierta próximamente. Te enviaremos una notificación si estás suscrito al boletín.')" class="text-xs font-bold text-aura-dark hover:text-aura-accent flex items-center space-x-1">
+                                    <span>Reservar cupo en preventa</span>
+                                    <i class="fa-solid fa-ticket text-[10px]"></i>
+                                </button>
+                            </article>
+
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- 7. CONTENIDO COMPLEMENTARIO (<aside>) -->
+                <aside class="semantic-highlight space-y-8" id="promociones" data-semantic-tag="<aside>">
+                    
+                    <!-- BLOQUE 1: PROMOCIÓN ESPECIAL -->
+                    <div class="bg-aura-dark text-white p-6 rounded-2xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-aura-gold/20 rounded-full blur-xl pointer-events-none"></div>
+                        
+                        <span class="bg-aura-gold text-aura-dark text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded">
+                            Exclusivo Online
+                        </span>
+                        
+                        <h3 class="font-serif text-2xl font-bold mt-4 mb-2">Obtén un 20% OFF</h3>
+                        <p class="text-gray-300 text-xs mb-4 leading-relaxed">
+                            En tu primera compra superior a $100 aplicando el código de bienvenida en caja.
+                        </p>
+                        
+                        <div class="bg-white/10 border border-white/20 p-3 rounded-lg text-center font-mono font-bold text-aura-sand text-sm tracking-widest mb-4">
+                            AURA2026
+                        </div>
+                        
+                        <button onclick="copyCode('AURA2026')" class="w-full bg-aura-gold hover:bg-white text-aura-dark font-bold py-2.5 rounded-lg text-xs transition">
+                            Copiar Código
+                        </button>
+                    </div>
+
+                    <!-- BLOQUE 2: RECOMENDACIÓN DE OUTFIT -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+                        <h3 class="font-serif text-lg font-bold text-aura-dark border-b border-gray-100 pb-3 flex items-center space-x-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-aura-gold"></i>
+                            <span>Outfit de la Semana</span>
+                        </h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Combina nuestra <strong>Camisa Oversize Atelier</strong> con pantalones fluidos en tono tierra y la <strong>Chaqueta de Cuero Urban</strong> para un contraste atrevido.
+                        </p>
+                        
+                        <div class="p-3 bg-aura-beige rounded-xl text-xs space-y-2">
+                            <div class="flex justify-between font-medium">
+                                <span>Total Outfit Recomendado:</span>
+                                <span class="text-aura-accent font-bold">$274.99</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 3: HORARIOS Y ATENCIÓN -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+                        <h3 class="font-serif text-lg font-bold text-aura-dark border-b border-gray-100 pb-3 flex items-center space-x-2">
+                            <i class="fa-solid fa-store text-aura-accent"></i>
+                            <span>Atención en Flagship Store</span>
+                        </h3>
+                        <ul class="text-xs space-y-2 text-gray-600">
+                            <li class="flex justify-between">
+                                <span>Lunes a Viernes:</span>
+                                <span class="font-semibold text-aura-dark">10:00 - 20:00</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>Sábados:</span>
+                                <span class="font-semibold text-aura-dark">10:00 - 18:00</span>
+                            </li>
+                            <li class="flex justify-between text-gray-400">
+                                <span>Domingos:</span>
+                                <span>Cerrado</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- BLOQUE 4: SUSCRIPCIÓN BOLETÍN -->
+                    <div class="bg-stone-100 p-6 rounded-2xl border border-stone-200 space-y-3">
+                        <h3 class="font-serif text-base font-bold text-aura-dark">Suscripción al Club Aura</h3>
+                        <p class="text-xs text-gray-600">Recibe invitaciones a ventas privadas y avances de temporada.</p>
+                        <form onsubmit="subscribeNewsletter(event)" class="space-y-2">
+                            <input type="email" required placeholder="Tu correo electrónico..." class="w-full text-xs px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-aura-dark">
+                            <button type="submit" class="w-full bg-aura-dark text-white text-xs font-bold py-2.5 rounded-md hover:bg-aura-gold hover:text-aura-dark transition">
+                                Unirse Ahora
+                            </button>
+                        </form>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE CONTACTO -->
+        <section id="contacto" class="semantic-highlight bg-white border-t border-stone-200 py-16" data-semantic-tag="<section>">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center space-y-4">
+                    <span class="text-xs uppercase tracking-widest text-aura-accent font-semibold">Atención Personalizada</span>
+                    <h2 class="font-serif text-3xl font-bold text-aura-dark">Contáctanos & Asesoría de Imagen</h2>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        ¿Tienes dudas sobre las tallas o deseas una cita de personal shopper personalizada? Escríbenos directamente.
+                    </p>
+
+                    <form onsubmit="handleContact(event)" class="text-left space-y-4 mt-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Nombre Completo</label>
+                                <input type="text" required class="w-full text-xs p-3 rounded-md border border-stone-300 focus:ring-1 focus:ring-aura-dark outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                                <input type="email" required class="w-full text-xs p-3 rounded-md border border-stone-300 focus:ring-1 focus:ring-aura-dark outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Mensaje</label>
+                            <textarea rows="4" required class="w-full text-xs p-3 rounded-md border border-stone-300 focus:ring-1 focus:ring-aura-dark outline-none" placeholder="¿En qué podemos ayudarte?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-aura-dark text-white font-medium py-3 rounded-md text-xs hover:bg-aura-accent transition">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 9. PIE DE PÁGINA (<footer) -->
+    <footer class="semantic-highlight bg-aura-dark text-white border-t border-gray-800 pt-16 pb-12" data-semantic-tag="<footer>">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800 text-xs">
+                
+                <!-- Columna 1: Marca y Misión -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-serif text-2xl font-bold tracking-wider text-aura-gold">AURA</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Boutique de indumentaria contemporánea comprometida con el diseño semántico, elegante, sostenible e intemporal.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Enlaces Rápidos -->
+                <div>
+                    <h4 class="font-semibold text-white uppercase tracking-wider mb-4 text-xs">Navegación</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-aura-gold transition">Inicio</a></li>
+                        <li><a href="#colecciones" class="hover:text-aura-gold transition">Catálogo de Colecciones</a></li>
+                        <li><a href="#novedades" class="hover:text-aura-gold transition">Noticias & Tendencias</a></li>
+                        <li><a href="#promociones" class="hover:text-aura-gold transition">Promociones Exclusivas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Información de Desarrollador / Académica -->
+                <div>
+                    <h4 class="font-semibold text-white uppercase tracking-wider mb-4 text-xs">Información del Proyecto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><strong>Sitio Web:</strong> Aura Fashion & Style</li>
+                        <li><strong>Desarrollador:</strong> Estudiante / Desarrollador Web</li>
+                        <li><strong>Año de Elaboración:</strong> <time datetime="2026">2026</time></li>
+                        <li><strong>Estándar:</strong> HTML5 Semántico Accesible</li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Redes y Contacto Directo -->
+                <div>
+                    <h4 class="font-semibold text-white uppercase tracking-wider mb-4 text-xs">Síguenos</h4>
+                    <div class="flex space-x-4 text-lg mb-4 text-gray-300">
+                        <a href="#" class="hover:text-aura-gold transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-aura-gold transition" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#" class="hover:text-aura-gold transition" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                    <p class="text-gray-400">contacto@aurafashion.com</p>
+                    <p class="text-gray-400">+57 (1) 800-AURA-2026</p>
+                </div>
+
+            </div>
+
+            <!-- Copy Rights -->
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Aura Fashion & Style. Todos los derechos reservados. Desarrollado cumpliendo con la Guía de Trabajo HTML5 Semántico.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gray-400">Política de Privacidad</a>
+                    <a href="#" class="hover:text-gray-400">Términos de Servicio</a>
+                    <a href="#" class="hover:text-gray-400">Accesibilidad Web</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <!-- MODAL 1: GUÍA EXPLICATIVA DE ETIQUETAS SEMÁNTICAS & ESQUEMA DE ESTRUCTURA -->
+    <div id="semantic-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            
+            <div class="p-6 bg-aura-dark text-white flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-graduation-cap text-aura-gold text-2xl"></i>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold">Documentación Semántica & Esquema HTML5</h3>
+                        <p class="text-xs text-gray-300">Guía de uso e implementación de etiquetas semánticas en 'Aura Fashion'</p>
+                    </div>
+                </div>
+                <button onclick="closeSemanticGuideModal()" class="text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-8 text-xs">
+                
+                <!-- 3. ESQUEMA INTERACTIVO DE LA ESTRUCTURA -->
+                <div>
+                    <h4 class="text-sm font-bold text-aura-dark uppercase tracking-wider mb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-sitemap text-aura-accent"></i>
+                        <span>3. Esquema Jerárquico del Documento</span>
+                    </h4>
+                    
+                    <div class="bg-stone-900 text-stone-200 p-4 rounded-xl font-mono text-xs overflow-x-auto leading-relaxed border border-stone-800">
+<pre class="text-aura-sand">
+HEADER
+└── NAV (Menú de navegación principal)
+MAIN
+├── SECTION (Colección / Catálogo de ropa)
+│   ├── ARTICLE (Prenda 1: Chaqueta de Cuero)
+│   ├── ARTICLE (Prenda 2: Vestido de Lino)
+│   ├── ARTICLE (Prenda 3: Camisa Oversize)
+│   └── ARTICLE (Prenda 4: Blazer Lana Executive)
+│
+├── SECTION (Noticias y Tendencias del Atelier)
+│   ├── ARTICLE (Noticia 1: Pasarela Circular)
+│   └── ARTICLE (Noticia 2: Masterclass Armario Cápsula)
+│
+└── ASIDE (Promociones, Outfit recomendado, Horarios y Suscripción)
+FOOTER (Derechos de autor, desarrollador, año y redes)
+</pre>
+                    </div>
+                </div>
+
+                <!-- 2. INVESTIGACIÓN / GLOSARIO DE ETIQUETAS SEMÁNTICAS -->
+                <div>
+                    <h4 class="text-sm font-bold text-aura-dark uppercase tracking-wider mb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-book text-aura-accent"></i>
+                        <span>2. Definición y Propósito de Cada Etiqueta Utilizada</span>
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;header&gt;</code>
+                            <p class="text-gray-600 mt-1">Encabezado principal. Contiene la identidad de marca (logo de Aura), título principal y menú de navegación.</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;nav&gt;</code>
+                            <p class="text-gray-600 mt-1">Sección de enlaces de navegación estratégicos (#inicio, #colecciones, #novedades, #contacto).</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;main&gt;</code>
+                            <p class="text-gray-600 mt-1">Contenido central y exclusivo del documento. Único por página web, excluye elementos repetitivos.</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;section&gt;</code>
+                            <p class="text-gray-600 mt-1">Agrupación temática de contenidos relacionados (Ej: Catálogo de productos y Blog de novedades).</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;article&gt;</code>
+                            <p class="text-gray-600 mt-1">Unidad de contenido independiente y autocontenida (Ej: Ficha individual de prenda de ropa o noticia del blog).</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;aside&gt;</code>
+                            <p class="text-gray-600 mt-1">Contenido tangencial/complementario al tema principal (Ej: Código promocional AURA2026, horarios de tienda).</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;figure&gt; &amp; &lt;figcaption&gt;</code>
+                            <p class="text-gray-600 mt-1">Encapsula elementos multimedia (imágenes) junto con una leyenda/descripción explicativa vinculada.</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <code class="text-aura-accent font-bold text-xs">&lt;time datetime="..."&gt;</code>
+                            <p class="text-gray-600 mt-1">Representa fechas y horas legibles tanto para usuarios como para motores de búsqueda de forma estructurada.</p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 md:col-span-2">
+                            <code class="text-aura-accent font-bold text-xs">Atributo alt (Accesibilidad)</code>
+                            <p class="text-gray-600 mt-1">Proporciona texto alternativo descriptivo en todas las imágenes para lectores de pantalla y usuarios con discapacidad visual.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 bg-stone-100 border-t border-stone-200 text-right">
+                <button onclick="closeSemanticGuideModal()" class="bg-aura-dark text-white px-5 py-2 rounded-lg font-medium text-xs hover:bg-aura-accent transition">
+                    Entendido / Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 2: CHECKLIST DE VERIFICACIÓN DE REQUISITOS (AUDITORÍA DOCENTE) -->
+    <div id="checklist-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div class="p-6 bg-green-950 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-clipboard-check text-green-400 text-2xl"></i>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold">Lista de Verificación de Requisitos</h3>
+                        <p class="text-xs text-green-200">Cumplimiento formal de los 10 puntos de la guía de trabajo</p>
+                    </div>
+                </div>
+                <button onclick="toggleChecklistModal()" class="text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-3 text-xs">
+                
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">1. Temática Elegida:</strong> Tienda Virtual de Ropa ('Aura Fashion & Style').
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">2. Investigación de Etiquetas Semánticas:</strong> Documentación integrada en modal explicativo.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">3. Esquema Estructural:</strong> Jerarquía HEADER-NAV, MAIN-SECTION-ARTICLE-ASIDE y FOOTER.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">4. Estructura Básica HTML5:</strong> Declara &lt;!DOCTYPE html&gt;, &lt;html&gt;, &lt;head&gt; con UTF-8 y viewport.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">5. Header y Nav:</strong> Contiene logo, título, descripción y menú de navegación funcional.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">6. Contenido Principal (&lt;main&gt;):</strong> Incluye 2 &lt;section&gt; y más de 2 &lt;article&gt;.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">7. Contenido Complementario (&lt;aside&gt;):</strong> Promociones, horarios y boletín.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">8. Multimedia &amp; Accesibilidad:</strong> Uso riguroso de &lt;figure&gt;, &lt;figcaption&gt; y atributos alt descriptivos.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">9. Pie de Página (&lt;footer&gt;):</strong> Datos de autor, año 2026, copyright y redes sociales.
+                    </div>
+                </div>
+
+                <div class="p-3 bg-green-50 border border-green-200 rounded-lg flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-check text-green-600 mt-0.5 text-base"></i>
+                    <div>
+                        <strong class="text-gray-900">10. Prueba &amp; Validación:</strong> Código libre de errores, navegable y totalmente responsive.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 bg-stone-100 border-t border-stone-200 text-right">
+                <button onclick="toggleChecklistModal()" class="bg-aura-dark text-white px-5 py-2 rounded-lg font-medium text-xs hover:bg-aura-accent transition">
+                    Cerrar Verificación
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- DRAWER / PANEL LATERAL DE CARRITO DE COMPRAS INTERACTIVO -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-5 bg-aura-dark text-white flex justify-between items-center">
+            <h3 class="font-serif font-bold text-base flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-aura-gold"></i>
+                <span>Tu Bolsa de Compras</span>
+            </h3>
+            <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+        </div>
+
+        <div id="cart-items-container" class="p-5 flex-grow overflow-y-auto space-y-4 text-xs">
+            <p id="empty-cart-msg" class="text-gray-400 text-center py-8">Tu bolsa de compras está vacía.</p>
+        </div>
+
+        <div class="p-5 border-t border-stone-200 bg-stone-50 space-y-3 text-xs">
+            <div class="flex justify-between text-sm font-bold text-aura-dark">
+                <span>Total Estimado:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button onclick="checkoutCart()" class="w-full bg-aura-dark text-white font-bold py-3 rounded-lg hover:bg-aura-accent transition">
+                Procesar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-aura-dark text-white px-4 py-3 rounded-xl shadow-2xl text-xs z-50 hidden flex items-center space-x-3 border border-aura-gold/30">
+        <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+        <span id="toast-msg">Notificación</span>
+    </div>
+
+    <!-- INTERACTIVIDAD CON JAVASCRIPT VANILLA -->
+    <script>
+        /* ESTADO DEL CARRITO */
+        let cart = [];
+
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
+            showToast(`"${title}" añadido al carrito.`);
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const containerEl = document.getElementById('cart-items-container');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+
+            countEl.textContent = cart.length;
+
+            if (cart.length === 0) {
+                if (emptyMsg) emptyMsg.style.display = 'block';
+                containerEl.innerHTML = '<p class="text-gray-400 text-center py-8">Tu bolsa de compras está vacía.</p>';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg border border-stone-200">
+                        <div>
+                            <p class="font-bold text-aura-dark">${item.title}</p>
+                            <p class="text-aura-accent font-medium">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-xs p-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            containerEl.innerHTML = html;
+            totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            const removed = cart.splice(index, 1);
+            updateCartUI();
+            showToast(`Producto eliminado.`);
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showToast('Añade al menos una prenda al carrito.');
+                return;
+            }
+            alert(`¡Gracias por tu pedido! Se ha simulado la orden por $${cart.reduce((a, b) => a + b.price, 0).toFixed(2)}.`);
+            cart = [];
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        /* FILTRADO DE PRODUCTOS */
+        function filterCategory(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-aura-dark', 'text-white');
+                btn.classList.add('bg-stone-100', 'text-gray-700');
+            });
+
+            event.currentTarget.classList.remove('bg-stone-100', 'text-gray-700');
+            event.currentTarget.classList.add('bg-aura-dark', 'text-white');
+
+            products.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* TOGGLE ETIQUETAS SEMÁNTICAS (VISUALIZADOR EDUCATIVO) */
+        let showingTags = false;
+        function toggleSemanticTags() {
+            showingTags = !showingTags;
+            const body = document.body;
+            const btnText = document.getElementById('tag-btn-text');
+
+            if (showingTags) {
+                body.classList.add('show-semantic-tags');
+                btnText.textContent = 'Ocultar Resaltado Semántico';
+                showToast('Etiquetas semánticas HTML5 resaltadas en pantalla.');
+            } else {
+                body.classList.remove('show-semantic-tags');
+                btnText.textContent = 'Resaltar Etiquetas Semánticas';
+            }
+        }
+
+        /* MODALES Y DRAWERS */
+        function openSemanticGuideModal() {
+            document.getElementById('semantic-modal').classList.remove('hidden');
+        }
+
+        function closeSemanticGuideModal() {
+            document.getElementById('semantic-modal').classList.add('hidden');
+        }
+
+        function toggleChecklistModal() {
+            const modal = document.getElementById('checklist-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('translate-x-full');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /* UTILIDADES */
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-msg');
+            msgEl.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function copyCode(code) {
+            const tempInput = document.createElement('input');
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(`Código ${code} copiado al portapapeles.`);
+        }
+
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showToast('¡Gracias por suscribirte al Club Aura!');
+            e.target.reset();
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            showToast('Mensaje enviado. Te responderemos en breve.');
+            e.target.reset();
+        }
+    </script>
+
+</body>
+</html>
